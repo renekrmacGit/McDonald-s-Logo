@@ -3,16 +3,397 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's Logo</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <title>McDonald's Clone - Logo Showcase</title>
+    <style>
+        /* OSNOVNI STILI */
+        body {
+            font-family: "Speedee", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #292929;
+            box-sizing: border-box;
+        }
+
+        /* --- GLAVA / HEADER (Spremenjeno: Centriran meni) --- */
+        header {
+            display: flex;
+            /* To postavi vsebino (meni) na sredino */
+            justify-content: center; 
+            align-items: center;
+            padding: 15px 40px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            background: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: 80px; /* Fiksna višina za lažje centriranje */
+        }
+
+        .header-left {
+            /* Logotip damo absolutno na levo, da ne moti centriranja menija */
+            position: absolute;
+            left: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .main-logo svg {
+            height: 60px; 
+            width: auto;
+        }
+
+        .header-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centriramo elemente znotraj menija */
+            gap: 10px;
+        }
+
+        .top-nav a, .main-nav a {
+            text-decoration: none;
+            color: #292929;
+            margin: 0 15px; /* Razmik med linki */
+            font-size: 14px;
+        }
+
+        .top-nav {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .cta-button {
+            background-color: #ffbc0d;
+            color: #292929;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background-color: #e0a50b;
+        }
+
+        /* GLAVNE SEKCIJE */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .hero-section {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-text p {
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .hero-image {
+            flex: 1.2;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 4px;
+            object-fit: contain; 
+        }
+
+        /* SEKCIJA ZA PREDSTAVITEV LOGOTIPOV */
+        .logo-showcase {
+            background-color: #f4f4f4;
+            padding: 50px 20px;
+            border-top: 4px solid #ffbc0d;
+        }
+
+        .logo-showcase h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 28px;
+        }
+
+        .logo-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px; /* Širše, da se koda lepše vidi */
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-card h3 {
+            border-bottom: 2px solid #ffbc0d;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        canvas {
+            border: 1px dashed #ccc;
+            margin-bottom: 15px;
+        }
+
+        /* STILI ZA PRIKAZ KODE */
+        details {
+            width: 100%;
+            margin-top: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #2d2d2d; /* Temno ozadje za cel blok */
+        }
+
+        summary {
+            background-color: #eee;
+            color: #333;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        summary::after {
+            content: '+'; 
+            font-weight: bold;
+        }
+
+        details[open] summary::after {
+            content: '-';
+        }
+
+        /* Koda znotraj bloka */
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2; /* Svetlo besedilo */
+            padding: 15px;
+            margin: 0;
+            overflow-x: auto; /* Scrollbar če je predolgo */
+            font-size: 11px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre; /* Ohrani originalne vrstice */
+            max-height: 300px; /* Da ne zavzame preveč prostora v višino */
+            overflow-y: auto;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+
+            // Skaliranje samo za vizualni prikaz na strani (da ni prevelik)
+            context.scale(0.4, 0.4); 
+
+            context.lineWidth = 5;
+            context.strokeStyle = "#ffbc0d"; 
+            context.fillStyle = "#ffbc0d";
+
+            context.beginPath();
+            // Tvoja originalna logika risanja
+            context.moveTo(427, 39);
+            context.bezierCurveTo(477, 39, 518, 253, 518, 517);
+            context.lineTo(592, 517);
+            context.bezierCurveTo(592, 233, 518, 2, 426, 2);
+            context.bezierCurveTo(374, 2, 328, 71, 297, 180);
+            context.bezierCurveTo(267, 71, 221, 2, 169, 2);
+            context.bezierCurveTo(77, 2, 3, 232, 3, 517);
+            context.lineTo(77, 517);
+            context.bezierCurveTo(77, 253, 118, 39, 168, 39);
+            context.bezierCurveTo(219, 39, 260, 237, 260, 480);
+            context.lineTo(334, 480);
+            context.bezierCurveTo(334, 237, 375, 39, 426, 39);
+            context.closePath();
+            context.stroke();
+            context.fill();
+        };
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>McDonald's Logo</h1>
-        <img src="assets/zgoraj.png" alt="Zgornji del">
-        <br>
-        <img src="assets/spodaj.png" alt="Spodnji del">
+
+    <header>
+        <div class="header-left">
+            <a href="#" class="main-logo">
+                <svg viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
+                </svg>
+            </a>
+        </div>
+        
+        <div class="header-right">
+            <div class="top-nav">
+                <a href="#">Language &#9662;</a>
+                <a href="#">Sign up for email</a>
+                <a href="#">Careers</a>
+            </div>
+            <div class="main-nav" style="display: flex; align-items: center;">
+                <a href="#">Our Menu &#9662;</a>
+                <a href="#">Download App</a>
+                <a href="#">MyMcDonald's Rewards</a>
+                <a href="#">Exclusive Deals</a>
+                <a href="#">About Our Food</a>
+                <a href="#">Locate</a>
+                <a href="#" class="cta-button">Order Now</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container hero-section">
+        <div class="hero-image">
+            <img src="zgoraj.png" alt="McDonalds Promo Top">
+        </div>
+        <div class="hero-text">
+            <h1>Order McDelivery® Now*</h1>
+            <p>Get all your McDonald’s favorites delivered right to your doorstep with McDelivery® on Uber Eats, DoorDash or Grubhub.</p>
+            <a href="#" class="cta-button">Order McDelivery Now</a>
+        </div>
     </div>
-    <script src="js/script.js"></script>
+
+    <div class="container hero-section">
+        <div class="hero-image">
+             <img src="spodaj.png" alt="App Deals Bottom">
+        </div>
+        <div class="hero-text">
+            <h1>Deals for Days</h1>
+            <p>Get exclusive deals on your McDonald’s favorites in the app with contactless Mobile Order & Pay*.</p>
+            <a href="#" class="cta-button">Get App Deals</a>
+        </div>
+    </div>
+
+    <section class="logo-showcase">
+        <h2>Tehnična Predstavitev Logotipov</h2>
+        
+        <div class="logo-grid">
+            
+            <div class="logo-card">
+                <h3>HTML5 Canvas</h3>
+                <p>Izrisano z JavaScript (Bezier Curves)</p>
+                <canvas id="canvas" width="240" height="220"></canvas>
+                
+                <details>
+                    <summary>Prikaži celotno JS kodo</summary>
+<pre>
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+
+context.lineWidth = 2;
+context.strokeStyle = "rgb(255,204,0,75)";
+context.fillStyle = "rgb(255,204,0,75)";
+
+context.beginPath();
+
+// M zgoraj
+context.moveTo(427, 39);
+
+context.bezierCurveTo(477, 39, 518, 253, 518, 517);
+context.lineTo(592, 517);
+
+context.bezierCurveTo(592, 233, 518, 2, 426, 2);
+context.bezierCurveTo(374, 2, 328, 71, 297, 180);
+context.bezierCurveTo(267, 71, 221, 2, 169, 2);
+context.bezierCurveTo(77, 2, 3, 232, 3, 517);
+
+// noga levo
+context.lineTo(77, 517);
+context.bezierCurveTo(77, 253, 118, 39, 168, 39);
+context.bezierCurveTo(219, 39, 260, 237, 260, 480);
+
+// povezava spodej
+context.lineTo(334, 480);
+
+// desna noga gor
+context.bezierCurveTo(334, 237, 375, 39, 426, 39);
+
+context.closePath();
+context.stroke();
+context.fill();
+</pre>
+                </details>
+            </div>
+
+            <div class="logo-card">
+                <h3>SVG Vektor</h3>
+                <p>Vektorski zapis (Path)</p>
+                <svg width="240" height="220" viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
+                  <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
+                </svg>
+
+                <details>
+                    <summary>Prikaži celotno SVG kodo</summary>
+<pre>
+&lt;svg width="605" height="550" viewBox="0 0 594 519" 
+ xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path fill="#ffcc00" d="M427 39
+    C477 39 518 253 518 517
+    H592
+    C592 233 518 2 426 2
+    C374 2 328 71 297 180
+    C267 71 221 2 169 2
+    C77 2 3 232 3 517
+    H77
+    C77 253 118 39 168 39
+    C219 39 260 237 260 480
+    H334
+    C334 237 375 39 426 39
+    Z"/&gt;
+&lt;/svg&gt;
+</pre>
+                </details>
+            </div>
+
+            <div class="logo-card">
+                <h3>PNG Slika</h3>
+                <p>Klasična slika (Import)</p>
+                <img src="mcdonaldsPNG.png" alt="PNG datoteka manjka" style="width: 200px; height: auto; margin-bottom: 15px;">
+                
+                <details>
+                    <summary>Prikaži HTML kodo</summary>
+<pre>
+&lt;img 
+  src="mcdonaldsPNG.png" 
+  alt="mcdonalds" 
+  width="605" 
+  height="550"&gt;
+</pre>
+                </details>
+            </div>
+
+        </div>
+    </section>
+
 </body>
 </html>
