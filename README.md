@@ -43,6 +43,8 @@ McDonald-s-Logo/
 │   └── main.css
 └── js/                 # Folder containing JavaScript logic
     └── script.js
+```
+
 🚀 How to Run Locally
 To view this project on your local machine, follow these steps:
 
