@@ -49,8 +49,9 @@ McDonald-s-Logo/
 To view this project on your local machine, follow these steps:
 
 Clone the repository:
-
+```text
 Bash
+```
 
 git clone [https://github.com/renekrmacGit/McDonald-s-Logo.git](https://github.com/renekrmacGit/McDonald-s-Logo.git)
 Navigate to the project folder:
