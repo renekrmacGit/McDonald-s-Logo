@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skrivni Logotipi - Easter Egg</title>
+    <style>
+        body {
+            font-family: "Speedee", Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f4f4;
+            color: #292929;
+            text-align: center;
+        }
+
+        h1 {
+            color: #292929;
+            margin-bottom: 10px;
+        }
+        
+        p.subtitle {
+            margin-bottom: 50px;
+            color: #666;
+        }
+
+        .logo-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .logo-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+            width: 350px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-top: 4px solid #ffbc0d;
+        }
+
+        .logo-card h3 {
+            border-bottom: 2px solid #ffbc0d;
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        canvas { border: 1px dashed #ccc; margin-bottom: 15px; }
+
+        /* KODA STYLING - POPRAVLJENO */
+        details {
+            width: 100%;
+            margin-top: 15px;
+            text-align: left;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #2d2d2d;
+        }
+
+        summary {
+            background-color: #eee;
+            color: #333;
+            padding: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        summary::after { content: '+'; font-weight: bold; }
+        details[open] summary::after { content: '-'; }
+
+        /* ODSTRANJEN MAX-HEIGHT da se vidi cela koda */
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2; 
+            padding: 15px;
+            margin: 0;
+            overflow-x: auto; 
+            font-size: 11px;
+            text-align: left;
+            font-family: 'Courier New', Courier, monospace;
+            white-space: pre;
+            /* Odstranil sem navpično drsanje, zdaj se raztegne do konca */
+            overflow-y: hidden; 
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 50px;
+            padding: 10px 20px;
+            background: #292929;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+        .back-btn:hover { background: #444; }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var canvas = document.getElementById("canvas");
+            if (canvas) {
+                var context = canvas.getContext("2d");
+                context.scale(0.4, 0.4); 
+
+                context.lineWidth = 5;
+                context.strokeStyle = "#ffbc0d"; 
+                context.fillStyle = "#ffbc0d";
+
+                context.beginPath();
+                context.moveTo(427, 39);
+                context.bezierCurveTo(477, 39, 518, 253, 518, 517);
+                context.lineTo(592, 517);
+                context.bezierCurveTo(592, 233, 518, 2, 426, 2);
+                context.bezierCurveTo(374, 2, 328, 71, 297, 180);
+                context.bezierCurveTo(267, 71, 221, 2, 169, 2);
+                context.bezierCurveTo(77, 2, 3, 232, 3, 517);
+                context.lineTo(77, 517);
+                context.bezierCurveTo(77, 253, 118, 39, 168, 39);
+                context.bezierCurveTo(219, 39, 260, 237, 260, 480);
+                context.lineTo(334, 480);
+                context.bezierCurveTo(334, 237, 375, 39, 426, 39);
+                context.closePath();
+                context.stroke();
+                context.fill();
+            }
+        };
+    </script>
+</head>
+<body>
+
+    <h1>Technical Logo Presentation</h1>
+    <p class="subtitle">You found the secret dev section!</p>
+    
+    <div class="logo-grid">
+        
+        <div class="logo-card">
+            <h3>HTML5 Canvas</h3>
+            <p>Drawn using JavaScript (Bezier Curves)</p>
+            <canvas id="canvas" width="240" height="220"></canvas>
+            
+            <details>
+                <summary>Show Full JS Code</summary>
+<pre>
+var canvas = document.getElementById("canvas");
+var context = canvas.getContext("2d");
+context.scale(0.4, 0.4); 
+
+context.lineWidth = 5;
+context.strokeStyle = "#ffbc0d"; 
+context.fillStyle = "#ffbc0d";
+
+context.beginPath();
+context.moveTo(427, 39);
+context.bezierCurveTo(477, 39, 518, 253, 518, 517);
+context.lineTo(592, 517);
+context.bezierCurveTo(592, 233, 518, 2, 426, 2);
+context.bezierCurveTo(374, 2, 328, 71, 297, 180);
+context.bezierCurveTo(267, 71, 221, 2, 169, 2);
+context.bezierCurveTo(77, 2, 3, 232, 3, 517);
+context.lineTo(77, 517);
+context.bezierCurveTo(77, 253, 118, 39, 168, 39);
+context.bezierCurveTo(219, 39, 260, 237, 260, 480);
+context.lineTo(334, 480);
+context.bezierCurveTo(334, 237, 375, 39, 426, 39);
+context.closePath();
+context.stroke();
+context.fill();
+</pre>
+            </details>
+        </div>
+
+        <div class="logo-card">
+            <h3>SVG Vector</h3>
+            <p>Vector-based representation (Path)</p>
+            <svg width="240" height="220" viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
+            </svg>
+
+            <details>
+                <summary>Show Full SVG Code</summary>
+<pre>
+&lt;svg width="240" height="220" viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg"&gt;
+  &lt;path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/&gt;
+&lt;/svg&gt;
+</pre>
+            </details>
+        </div>
+
+        <div class="logo-card">
+            <h3>PNG Image</h3>
+            <p>Classic raster image (Import)</p>
+            <img src="assets/mcdonaldsPNG.png" alt="PNG file missing" style="width: 240px; height: auto; margin-bottom: 15px;">
+            
+            <details>
+                <summary>Show HTML Code</summary>
+<pre>
+&lt;!-- Preveri pot do slike --&gt;
+&lt;img src="assets/mcdonaldsPNG.png" alt="McDonald's Logo" style="width: 240px; height: auto;"&gt;
+</pre>
+            </details>
+        </div>
+
+    </div>
+
+    <a href="index.html" class="back-btn">Nazaj na glavno stran</a>
+
+</body>
+</html>
