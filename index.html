@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's Clone - Logo Showcase</title>
+    <title>McDonald's Clone - Domov</title>
     <style>
-
+        /* OSNOVNE NASTAVITVE */
         body {
             font-family: "Speedee", Helvetica, Arial, sans-serif;
             margin: 0;
             padding: 0;
             color: #292929;
             box-sizing: border-box;
+            background-color: #fff;
         }
 
+        /* GLAVA (HEADER) - SREDINSKA PORAVNAVA */
         header {
             display: flex;
-            justify-content: center; 
+            justify-content: center; /* VSEBINA NA SREDINI */
             align-items: center;
             padding: 15px 40px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
@@ -24,14 +26,27 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            height: 80px; 
+            height: 80px;
+            position: relative; 
         }
 
+        /* Logotip fiksiran levo zgoraj - Easter Egg */
         .header-left {
             position: absolute;
             left: 40px;
+            top: 50%;
+            transform: translateY(-50%);
             display: flex;
             align-items: center;
+        }
+
+        .main-logo {
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: block;
+        }
+        .main-logo:hover {
+            transform: scale(1.05);
         }
 
         .main-logo svg {
@@ -39,11 +54,12 @@
             width: auto;
         }
 
+        /* Desni del (meni) */
         .header-right {
             display: flex;
             flex-direction: column;
             align-items: center; 
-            gap: 10px;
+            gap: 8px;
         }
 
         .top-nav a, .main-nav a {
@@ -56,7 +72,7 @@
         .top-nav {
             font-size: 12px;
             color: #555;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .cta-button {
@@ -68,22 +84,26 @@
             font-weight: bold;
             border: none;
             cursor: pointer;
+            display: inline-block;
+            transition: background 0.3s;
         }
 
         .cta-button:hover {
             background-color: #e0a50b;
         }
 
+        /* CONTAINER ZA VSEBINO */
         .container {
             max-width: 1100px;
             margin: 0 auto;
             padding: 40px 20px;
         }
 
+        /* HERO SEKCIJE */
         .hero-section {
             display: flex;
             align-items: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
             gap: 40px;
         }
 
@@ -113,133 +133,149 @@
             object-fit: contain; 
         }
 
-        .logo-showcase {
-            background-color: #f4f4f4;
-            padding: 50px 20px;
-            border-top: 4px solid #ffbc0d;
+        /* PRODUKTI - MREŽA 3x3 */
+        .products-section {
+            background-color: #f9f9f9;
+            padding: 60px 20px;
         }
 
-        .logo-showcase h2 {
+        .products-section h2 {
             text-align: center;
+            font-size: 32px;
             margin-bottom: 40px;
-            font-size: 28px;
+            font-weight: 800;
         }
 
-        .logo-grid {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            max-width: 1200px;
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 30px;
+            max-width: 1100px;
             margin: 0 auto;
         }
 
-        .logo-card {
+        @media (max-width: 768px) {
+            .product-grid {
+                grid-template-columns: repeat(1, 1fr);
+            }
+            .header-right { display: none; }
+            .header-left { position: static; transform: none; margin: 0 auto; }
+            header { justify-content: center; }
+        }
+
+        .product-card {
             background: white;
-            padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 20px;
             text-align: center;
-            width: 350px;
-            margin-bottom: 20px;
+            transition: transform 0.3s ease;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image-placeholder {
+            width: 100%;
+            height: 180px;
+            margin-bottom: 15px;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-image-placeholder img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
-        .logo-card h3 {
-            border-bottom: 2px solid #ffbc0d;
-            padding-bottom: 10px;
-            margin-bottom: 10px;
-            display: inline-block;
+        .product-card h3 {
+            margin: 10px 0;
+            font-size: 20px;
         }
 
-        canvas {
-            border: 1px dashed #ccc;
+        .product-card p {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            flex-grow: 1; 
+        }
+
+        .price-tag {
+            font-size: 18px;
+            font-weight: bold;
+            color: #db0007;
+            display: block;
             margin-bottom: 15px;
         }
 
-        /* STYLES FOR CODE DISPLAY */
-        details {
-            width: 100%;
-            margin-top: 15px;
-            text-align: left;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #2d2d2d;
+        /* NOGA (FOOTER) */
+        footer {
+            background-color: #292929;
+            color: white;
+            padding: 50px 20px 20px;
+            margin-top: 50px;
         }
 
-        summary {
-            background-color: #eee;
-            color: #333;
-            padding: 10px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 13px;
-            list-style: none;
+        .footer-content {
+            max-width: 1100px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
-        }
-        
-        summary::after {
-            content: '+'; 
-            font-weight: bold;
+            flex-wrap: wrap;
+            gap: 40px;
         }
 
-        details[open] summary::after {
-            content: '-';
+        .footer-column h4 {
+            color: #ffbc0d;
+            font-size: 18px;
+            margin-bottom: 20px;
         }
 
-        /* Code inside the block */
-        pre {
-            background-color: #2d2d2d;
-            color: #f8f8f2; 
-            padding: 15px;
-            margin: 0;
-            overflow-x: auto; 
-            font-size: 11px;
-            text-align: left;
-            font-family: 'Courier New', Courier, monospace;
-            white-space: pre;
-            max-height: 300px;
-            overflow-y: auto;
+        .footer-column ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .footer-column ul li a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            max-width: 1100px;
+            margin: 40px auto 0;
+            border-top: 1px solid #444;
+            padding-top: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #888;
         }
 
     </style>
-
-    <script>
-        window.onload = function () {
-            var canvas = document.getElementById("canvas");
-            var context = canvas.getContext("2d");
-            context.scale(0.4, 0.4); 
-
-            context.lineWidth = 5;
-            context.strokeStyle = "#ffbc0d"; 
-            context.fillStyle = "#ffbc0d";
-
-            context.beginPath();
-            context.moveTo(427, 39);
-            context.bezierCurveTo(477, 39, 518, 253, 518, 517);
-            context.lineTo(592, 517);
-            context.bezierCurveTo(592, 233, 518, 2, 426, 2);
-            context.bezierCurveTo(374, 2, 328, 71, 297, 180);
-            context.bezierCurveTo(267, 71, 221, 2, 169, 2);
-            context.bezierCurveTo(77, 2, 3, 232, 3, 517);
-            context.lineTo(77, 517);
-            context.bezierCurveTo(77, 253, 118, 39, 168, 39);
-            context.bezierCurveTo(219, 39, 260, 237, 260, 480);
-            context.lineTo(334, 480);
-            context.bezierCurveTo(334, 237, 375, 39, 426, 39);
-            context.closePath();
-            context.stroke();
-            context.fill();
-        };
-    </script>
 </head>
 <body>
 
     <header>
         <div class="header-left">
-            <a href="#" class="main-logo">
+            <a href="index/skrivnost.html" target="_blank" class="main-logo" title="Skrivni razvijalski meni">
                 <svg viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
                   <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
                 </svg>
@@ -248,144 +284,178 @@
         
         <div class="header-right">
             <div class="top-nav">
-                <a href="#">Language ▼</a>
-                <a href="#">Sign Up for Email</a>
-                <a href="#">Careers</a>
+                <a href="#">Slovenščina ▼</a>
+                <a href="#">Prijavi se na novice</a>
+                <a href="https://www.mcdonalds.si/zaposlitev">Zaposlitev</a>
             </div>
-            <div class="main-nav" style="display: flex; align-items: center;">
-                <a href="#">Our Menu ▼</a>
-                <a href="#">Download App</a>
+            <div class="main-nav">
+                <a href="https://www.mcdonalds.si/ponudba/aktualno">Meni ▼</a>
+                <a href="https://apps.apple.com/si/app/mcdonalds/id1217507712">Aplikacija</a>
                 <a href="#">MyMcDonald's Rewards</a>
-                <a href="#">Exclusive Deals</a>
-                <a href="#">About Our Food</a>
-                <a href="#">Locate</a>
-                <a href="#" class="cta-button">Order Now</a>
+                <a href="https://www.mcdonalds.si/restavracije">Restavracije</a>
+                <a href="#" class="cta-button">Naroči McDelivery</a>
             </div>
         </div>
     </header>
 
     <div class="container hero-section">
         <div class="hero-image">
-            <img src="assets/zgoraj.png" alt="McDonald's Top Promotion">
+            <img src="assets/zgoraj.png" alt="Promocija">
         </div>
         <div class="hero-text">
-            <h1>Order McDelivery® Now*</h1>
-            <p>Get all your McDonald’s favorites delivered right to your doorstep with McDelivery® on Uber Eats, DoorDash, or Grubhub.</p>
-            <a href="#" class="cta-button">Order McDelivery Now</a>
+            <h1>McDelivery® Dostava</h1>
+            <p>Uživajte v svojih najljubših izdelkih udobno doma. Naročite dostavo preko Wolt, Glovo ali Uber Eats.</p>
+            <a href="#" class="cta-button">Naroči zdaj</a>
         </div>
     </div>
 
     <div class="container hero-section">
         <div class="hero-image">
-             <img src="assets/spodaj.png" alt="Bottom App Deals">
+             <img src="assets/spodaj.png" alt="Aplikacija">
         </div>
         <div class="hero-text">
-            <h1>Deals for Days</h1>
-            <p>Get exclusive deals on your McDonald’s favorites in the app with contactless Mobile Order & Pay*.</p>
-            <a href="#" class="cta-button">Get App Deals</a>
+            <h1>Ekskluzivni kuponi</h1>
+            <p>Prenesite aplikacijo in izkoristite posebne ugodnosti, zbirajte točke in jejte ceneje.</p>
+            <a href="https://apps.apple.com/si/app/mcdonalds/id1217507712" class="cta-button">Prenesi App</a>
         </div>
     </div>
 
-    <section class="logo-showcase">
-        <h2>Technical Logo Presentation</h2>
-        
-        <div class="logo-grid">
+    <section class="products-section">
+        <h2>Naša Ponudba</h2>
+        <div class="product-grid">
             
-            <div class="logo-card">
-                <h3>HTML5 Canvas</h3>
-                <p>Drawn using JavaScript (Bezier Curves)</p>
-                <canvas id="canvas" width="240" height="220"></canvas>
-                
-                <details>
-                    <summary>Show Full JS Code</summary>
-<pre>
-var canvas = document.getElementById("canvas");
-var context = canvas.getContext("2d");
-
-context.lineWidth = 2;
-context.strokeStyle = "rgb(255,204,0,75)";
-context.fillStyle = "rgb(255,204,0,75)";
-
-context.beginPath();
-
-// Top of the M
-context.moveTo(427, 39);
-
-context.bezierCurveTo(477, 39, 518, 253, 518, 517);
-context.lineTo(592, 517);
-
-context.bezierCurveTo(592, 233, 518, 2, 426, 2);
-context.bezierCurveTo(374, 2, 328, 71, 297, 180);
-context.bezierCurveTo(267, 71, 221, 2, 169, 2);
-context.bezierCurveTo(77, 2, 3, 232, 3, 517);
-
-// Left leg
-context.lineTo(77, 517);
-context.bezierCurveTo(77, 253, 118, 39, 168, 39);
-context.bezierCurveTo(219, 39, 260, 237, 260, 480);
-
-// Bottom connection
-context.lineTo(334, 480);
-
-// Right leg upwards
-context.bezierCurveTo(334, 237, 375, 39, 426, 39);
-
-context.closePath();
-context.stroke();
-context.fill();
-</pre>
-                </details>
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Big-Mac-1:1-4-product-tile-desktop" alt="Big Mac">
+                </div>
+                <h3>Big Mac®</h3>
+                <p>Ikona okusa. Dva goveja zrezka, solata, sir, kumarice in posebna omaka.</p>
+                <span class="price-tag">4,80 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
             </div>
 
-            <div class="logo-card">
-                <h3>SVG Vector</h3>
-                <p>Vector-based representation (Path)</p>
-                <svg width="240" height="220" viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
-                </svg>
-
-                <details>
-                    <summary>Show Full SVG Code</summary>
-<pre>
-&lt;svg width="605" height="550" viewBox="0 0 594 519" 
- xmlns="http://www.w3.org/2000/svg"&gt;
-  &lt;path fill="#ffcc00" d="M427 39
-    C477 39 518 253 518 517
-    H592
-    C592 233 518 2 426 2
-    C374 2 328 71 297 180
-    C267 71 221 2 169 2
-    C77 2 3 232 3 517
-    H77
-    C77 253 118 39 168 39
-    C219 39 260 237 260 480
-    H334
-    C334 237 375 39 426 39
-    Z"/&gt;
-&lt;/svg&gt;
-</pre>
-                </details>
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                     <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-fries-medium:1-4-product-tile-desktop" alt="Fries">
+                </div>
+                <h3>Pommes Frites</h3>
+                <p>Legendarni krompirček, ki ga prepoznate po celem svetu.</p>
+                <span class="price-tag">2,60 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
             </div>
 
-            <div class="logo-card">
-                <h3>PNG Image</h3>
-                <p>Classic raster image (Import)</p>
-                <img src="assets/mcdonaldsPNG.png" alt="PNG file missing" style="width: 200px; height: auto; margin-bottom: 15px;">
-                
-                <details>
-                    <summary>Show HTML Code</summary>
-<pre>
-&lt;img 
-  src="mcdonaldsPNG.png" 
-  alt="mcdonalds" 
-  width="605" 
-  height="550"&gt;
-</pre>
-                </details>
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Chicken-McNuggets-10pc-1:1-4-product-tile-desktop" alt="McNuggets">
+                </div>
+                <h3>McNuggets® (6 kos)</h3>
+                <p>Hrustljavi piščančji grižljaji iz belega mesa.</p>
+                <span class="price-tag">4,20 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-McChicken-1:1-4-product-tile-desktop" alt="McChicken">
+                </div>
+                <h3>McChicken®</h3>
+                <p>Hrustljav piščanec, sveža solata in majonezna omaka.</p>
+                <span class="price-tag">4,10 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Cheeseburger-1:1-4-product-tile-desktop" alt="Double Cheese">
+                </div>
+                <h3>Double Cheeseburger</h3>
+                <p>Dvojni užitek s sirom in govedino.</p>
+                <span class="price-tag">3,50 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Coca-Cola-Classic-Small-1:1-4-product-tile-desktop" alt="Coca Cola">
+                </div>
+                <h3>Coca-Cola® 0.5L</h3>
+                <p>Popolna osvežitev k vašemu obroku.</p>
+                <span class="price-tag">2,30 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://www.mcdonalds.si/img/edb3e233-2939-4fa5-b348-9723d9a71656/w-mcflurry-vanilija-oreo.png?fm=jpg&q=80&fit=max&crop=800%2C800%2C0%2C0&w=600&h=600" alt="McFlurry">
+                </div>
+                <h3>McFlurry® Oreo</h3>
+                <p>Kremast sladoled s koščki Oreo piškotov.</p>
+                <span class="price-tag">3,10 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://www.mcdonalds.si/img/8bd0c877-b804-4b9b-88f0-bb446f02dd87/spletna-stran-hpm-menu.png?fm=png&q=80&fit=max&crop=800%2C800%2C0%2C0&w=200&h=200" alt="Happy Meal">
+                </div>
+                <h3>Happy Meal™</h3>
+                <p>Obrok za najmlajše z igračo presenečenja.</p>
+                <span class="price-tag">5,50 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image-placeholder">
+                    <img src="https://www.mcdonalds.si/img/b584faa2-a62d-41b9-ad5d-3364e78f96c9/pita-jabolko.png?fm=png&q=80&fit=max&crop=800%2C800%2C0%2C0&w=200&h=200" alt="Pita">
+                </div>
+                <h3>Jabolčna pita</h3>
+                <p>Topla, hrustljava in polna sladkih jabolk.</p>
+                <span class="price-tag">1,80 €</span>
+                <a href="#" class="cta-button">Dodaj</a>
             </div>
 
         </div>
     </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h4>O nas</h4>
+                <ul>
+                    <li><a href="#">Zgodovina</a></li>
+                    <li><a href="#">Kariera</a></li>
+                    <li><a href="#">Trajnostni razvoj</a></li>
+                    <li><a href="#">Sodelovanje</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h4>Pomoč strankam</h4>
+                <ul>
+                    <li><a href="#">Pogosta vprašanja</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="https://apps.apple.com/si/app/mcdonalds/id1217507712">Mobilna aplikacija</a></li>
+                    <li><a href="#">Pravila nagradnih iger</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4>Kontakt & Lokacija</h4>
+                <ul>
+                    <li>📍 Dunajska cesta 123, Ljubljana</li>
+                    <li>📞 01 234 56 78</li>
+                    <li>✉️ info@mcdonalds-clone.si</li>
+                    <li style="margin-top: 15px;">
+                        <span style="font-size: 20px;">📘 📷 🐦</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 McDonald's Clone. Vse pravice pridržane. | Pravilnik o zasebnosti | Piškotki</p>
+        </div>
+    </footer>
 
 </body>
 </html>
