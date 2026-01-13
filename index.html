@@ -3,459 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>McDonald's Clone - Domov</title>
+    <title>Opozorilo - Izobraževalni Projekt</title>
     <style>
-        /* OSNOVNE NASTAVITVE */
         body {
             font-family: "Speedee", Helvetica, Arial, sans-serif;
+            background-color: #db0007; /* McDonald's rdeča */
             margin: 0;
             padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             color: #292929;
-            box-sizing: border-box;
-            background-color: #fff;
         }
 
-        /* GLAVA (HEADER) - SREDINSKA PORAVNAVA */
-        header {
-            display: flex;
-            justify-content: center; /* VSEBINA NA SREDINI */
-            align-items: center;
-            padding: 15px 40px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            background: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            height: 80px;
-            position: relative; 
+        .warning-card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            max-width: 500px;
+            text-align: center;
+            margin: 20px;
+            border-top: 8px solid #ffbc0d; /* McDonald's rumena črta */
         }
 
-        /* Logotip fiksiran levo zgoraj - Easter Egg */
-        .header-left {
-            position: absolute;
-            left: 40px;
-            top: 50%;
-            transform: translateY(-50%);
-            display: flex;
-            align-items: center;
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
         }
 
-        .main-logo {
-            cursor: pointer;
-            transition: transform 0.2s;
+        .icon {
+            font-size: 50px;
+            margin-bottom: 20px;
             display: block;
         }
-        .main-logo:hover {
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #555;
+        }
+
+        .highlight {
+            font-weight: bold;
+            color: #db0007;
+        }
+
+        .btn {
+            background-color: #ffbc0d;
+            color: #292929;
+            padding: 15px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            display: inline-block;
+            transition: transform 0.2s, background-color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #e0a50b;
             transform: scale(1.05);
         }
 
-        .main-logo svg {
-            height: 60px; 
-            width: auto;
-        }
-
-        /* Desni del (meni) */
-        .header-right {
-            display: flex;
-            flex-direction: column;
-            align-items: center; 
-            gap: 8px;
-        }
-
-        .top-nav a, .main-nav a {
-            text-decoration: none;
-            color: #292929;
-            margin: 0 15px;
-            font-size: 14px;
-        }
-
-        .top-nav {
-            font-size: 12px;
-            color: #555;
-            margin-bottom: 2px;
-        }
-
-        .cta-button {
-            background-color: #ffbc0d;
-            color: #292929;
-            padding: 10px 20px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            display: inline-block;
-            transition: background 0.3s;
-        }
-
-        .cta-button:hover {
-            background-color: #e0a50b;
-        }
-
-        /* CONTAINER ZA VSEBINO */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-
-        /* HERO SEKCIJE */
-        .hero-section {
-            display: flex;
-            align-items: center;
-            margin-bottom: 40px;
-            gap: 40px;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-text h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-
-        .hero-text p {
-            line-height: 1.5;
-            margin-bottom: 20px;
-        }
-
-        .hero-image {
-            flex: 1.2;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 4px;
-            object-fit: contain; 
-        }
-
-        /* PRODUKTI - MREŽA 3x3 */
-        .products-section {
-            background-color: #f9f9f9;
-            padding: 60px 20px;
-        }
-
-        .products-section h2 {
-            text-align: center;
-            font-size: 32px;
-            margin-bottom: 40px;
-            font-weight: 800;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr); 
-            gap: 30px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .product-grid {
-                grid-template-columns: repeat(1, 1fr);
-            }
-            .header-right { display: none; }
-            .header-left { position: static; transform: none; margin: 0 auto; }
-            header { justify-content: center; }
-        }
-
-        .product-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            padding: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .product-image-placeholder {
-            width: 100%;
-            height: 180px;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .product-image-placeholder img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        .product-card h3 {
-            margin: 10px 0;
-            font-size: 20px;
-        }
-
-        .product-card p {
-            font-size: 13px;
-            color: #555;
-            margin-bottom: 15px;
-            line-height: 1.4;
-            flex-grow: 1; 
-        }
-
-        .price-tag {
-            font-size: 18px;
-            font-weight: bold;
-            color: #db0007;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        /* NOGA (FOOTER) */
-        footer {
-            background-color: #292929;
-            color: white;
-            padding: 50px 20px 20px;
-            margin-top: 50px;
-        }
-
-        .footer-content {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 40px;
-        }
-
-        .footer-column h4 {
-            color: #ffbc0d;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
-
-        .footer-column ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-column ul li a {
-            color: #ccc;
-            text-decoration: none;
-            font-size: 14px;
-        }
-
-        .footer-column ul li a:hover {
-            color: white;
-            text-decoration: underline;
-        }
-
-        .footer-bottom {
-            max-width: 1100px;
-            margin: 40px auto 0;
-            border-top: 1px solid #444;
-            padding-top: 20px;
-            text-align: center;
+        .footer-note {
+            margin-top: 20px;
             font-size: 12px;
             color: #888;
         }
-
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-left">
-            <a href="index/skrivnost.html" target="_blank" class="main-logo" title="Skrivni razvijalski meni">
-                <svg viewBox="0 0 594 519" xmlns="http://www.w3.org/2000/svg">
-                  <path fill="#ffbc0d" d="M427 39 C477 39 518 253 518 517 H592 C592 233 518 2 426 2 C374 2 328 71 297 180 C267 71 221 2 169 2 C77 2 3 232 3 517 H77 C77 253 118 39 168 39 C219 39 260 237 260 480 H334 C334 237 375 39 426 39 Z"/>
-                </svg>
-            </a>
-        </div>
+    <div class="warning-card">
+        <span class="icon">⚠️🍔</span>
+        <h1>Pomembno Opozorilo</h1>
         
-        <div class="header-right">
-            <div class="top-nav">
-                <a href="#">Slovenščina ▼</a>
-                <a href="#">Prijavi se na novice</a>
-                <a href="https://www.mcdonalds.si/zaposlitev">Zaposlitev</a>
-            </div>
-            <div class="main-nav">
-                <a href="https://www.mcdonalds.si/ponudba/aktualno">Meni ▼</a>
-                <a href="https://apps.apple.com/si/app/mcdonalds/id1217507712">Aplikacija</a>
-                <a href="#">MyMcDonald's Rewards</a>
-                <a href="https://www.mcdonalds.si/restavracije">Restavracije</a>
-                <a href="#" class="cta-button">Naroči McDelivery</a>
-            </div>
-        </div>
-    </header>
+        <p>
+            Pozdravljeni! Ta spletna stran je ustvarjena izključno v <span class="highlight">izobraževalne namene</span> (šolski projekt/portfolio).
+        </p>
+        
+        <p>
+            <strong>To NI uradna spletna stran podjetja McDonald's.</strong><br>
+            Tukaj ne morete naročiti prave hrane in ne vpisujte osebnih podatkov.
+        </p>
 
-    <div class="container hero-section">
-        <div class="hero-image">
-            <img src="assets/zgoraj.png" alt="Promocija">
-        </div>
-        <div class="hero-text">
-            <h1>McDelivery® Dostava</h1>
-            <p>Uživajte v svojih najljubših izdelkih udobno doma. Naročite dostavo preko Wolt, Glovo ali Uber Eats.</p>
-            <a href="#" class="cta-button">Naroči zdaj</a>
+        <a href="index.html" class="btn">Razumem, vstopi na projekt</a>
+
+        <div class="footer-note">
+            Educational purposes only. Not affiliated with McDonald's Corp.
         </div>
     </div>
-
-    <div class="container hero-section">
-        <div class="hero-image">
-             <img src="assets/spodaj.png" alt="Aplikacija">
-        </div>
-        <div class="hero-text">
-            <h1>Ekskluzivni kuponi</h1>
-            <p>Prenesite aplikacijo in izkoristite posebne ugodnosti, zbirajte točke in jejte ceneje.</p>
-            <a href="https://apps.apple.com/si/app/mcdonalds/id1217507712" class="cta-button">Prenesi App</a>
-        </div>
-    </div>
-
-    <section class="products-section">
-        <h2>Naša Ponudba</h2>
-        <div class="product-grid">
-            
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Big-Mac-1:1-4-product-tile-desktop" alt="Big Mac">
-                </div>
-                <h3>Big Mac®</h3>
-                <p>Ikona okusa. Dva goveja zrezka, solata, sir, kumarice in posebna omaka.</p>
-                <span class="price-tag">4,80 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                     <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-fries-medium:1-4-product-tile-desktop" alt="Fries">
-                </div>
-                <h3>Pommes Frites</h3>
-                <p>Legendarni krompirček, ki ga prepoznate po celem svetu.</p>
-                <span class="price-tag">2,60 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Chicken-McNuggets-10pc-1:1-4-product-tile-desktop" alt="McNuggets">
-                </div>
-                <h3>McNuggets® (6 kos)</h3>
-                <p>Hrustljavi piščančji grižljaji iz belega mesa.</p>
-                <span class="price-tag">4,20 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-McChicken-1:1-4-product-tile-desktop" alt="McChicken">
-                </div>
-                <h3>McChicken®</h3>
-                <p>Hrustljav piščanec, sveža solata in majonezna omaka.</p>
-                <span class="price-tag">4,10 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Double-Cheeseburger-1:1-4-product-tile-desktop" alt="Double Cheese">
-                </div>
-                <h3>Double Cheeseburger</h3>
-                <p>Dvojni užitek s sirom in govedino.</p>
-                <span class="price-tag">3,50 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://s7d1.scene7.com/is/image/mcdonalds/t-mcdonalds-Coca-Cola-Classic-Small-1:1-4-product-tile-desktop" alt="Coca Cola">
-                </div>
-                <h3>Coca-Cola® 0.5L</h3>
-                <p>Popolna osvežitev k vašemu obroku.</p>
-                <span class="price-tag">2,30 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://www.mcdonalds.si/img/edb3e233-2939-4fa5-b348-9723d9a71656/w-mcflurry-vanilija-oreo.png?fm=jpg&q=80&fit=max&crop=800%2C800%2C0%2C0&w=600&h=600" alt="McFlurry">
-                </div>
-                <h3>McFlurry® Oreo</h3>
-                <p>Kremast sladoled s koščki Oreo piškotov.</p>
-                <span class="price-tag">3,10 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://www.mcdonalds.si/img/8bd0c877-b804-4b9b-88f0-bb446f02dd87/spletna-stran-hpm-menu.png?fm=png&q=80&fit=max&crop=800%2C800%2C0%2C0&w=200&h=200" alt="Happy Meal">
-                </div>
-                <h3>Happy Meal™</h3>
-                <p>Obrok za najmlajše z igračo presenečenja.</p>
-                <span class="price-tag">5,50 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-            <div class="product-card">
-                <div class="product-image-placeholder">
-                    <img src="https://www.mcdonalds.si/img/b584faa2-a62d-41b9-ad5d-3364e78f96c9/pita-jabolko.png?fm=png&q=80&fit=max&crop=800%2C800%2C0%2C0&w=200&h=200" alt="Pita">
-                </div>
-                <h3>Jabolčna pita</h3>
-                <p>Topla, hrustljava in polna sladkih jabolk.</p>
-                <span class="price-tag">1,80 €</span>
-                <a href="#" class="cta-button">Dodaj</a>
-            </div>
-
-        </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-column">
-                <h4>O nas</h4>
-                <ul>
-                    <li><a href="#">Zgodovina</a></li>
-                    <li><a href="#">Kariera</a></li>
-                    <li><a href="#">Trajnostni razvoj</a></li>
-                    <li><a href="#">Sodelovanje</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-column">
-                <h4>Pomoč strankam</h4>
-                <ul>
-                    <li><a href="#">Pogosta vprašanja</a></li>
-                    <li><a href="#">Kontakt</a></li>
-                    <li><a href="https://apps.apple.com/si/app/mcdonalds/id1217507712">Mobilna aplikacija</a></li>
-                    <li><a href="#">Pravila nagradnih iger</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-column">
-                <h4>Kontakt & Lokacija</h4>
-                <ul>
-                    <li>📍 Dunajska cesta 123, Ljubljana</li>
-                    <li>📞 01 234 56 78</li>
-                    <li>✉️ info@mcdonalds-clone.si</li>
-                    <li style="margin-top: 15px;">
-                        <span style="font-size: 20px;">📘 📷 🐦</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 McDonald's Clone. Vse pravice pridržane. | Pravilnik o zasebnosti | Piškotki</p>
-        </div>
-    </footer>
 
 </body>
 </html>
